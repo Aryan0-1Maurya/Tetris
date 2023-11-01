@@ -1,0 +1,573 @@
+<!-- 
+
+      ************************************************************
+      
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tetris</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Aclonica"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="author" content="Aryan Maurya" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <meta
+      name="description"
+      content="This is online tetris game build for make mood happy its very intresting play and do time pass  by aryan maurya enjoy your game"
+    />
+    <meta
+      name="keywords"
+      content="teris,tetris ,tetris games,tetris game online,tetrisse,tetris,online games,play games,  online , games player , online  game,online games hub, fun free, online , game by aryan , aryan sir, aryan sir game"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        -webkit-user-select: none;
+      }
+      div {
+        width: 360px;
+        height: 460px;
+        transform: scale(1);
+        transform-origin: 0 0;
+      }
+      .tetris {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        font-family: "Aclonica";
+        font-size: 28px;
+        color: teal;
+      }
+      .by {
+        position: absolute;
+        top: 40px;
+        left: 185px;
+        font-size: 12px;
+      }
+      .img-circle {
+        position: absolute;
+        top: 5px;
+        left: 305px;
+        height: 50px;
+        width: 50px;
+        border: 1px solid teal;
+        border-radius: 50%;
+      }
+      .maincanvas {
+        position: absolute;
+        top: 56px;
+        left: 8px;
+        display: block;
+        border: 2px solid teal;
+      }
+      .subcanvas {
+        position: absolute;
+        top: 210px;
+        left: 255px;
+        display: block;
+        border: 2px solid teal;
+      }
+      .labelscore {
+        position: absolute;
+        top: 60px;
+        left: 255px;
+        padding: 0px;
+        border: none;
+        text-align: left;
+        font-weight: bold;
+      }
+      .score {
+        position: absolute;
+        top: 80px;
+        left: 255px;
+        padding: 0px;
+        width: 100px;
+        height: 45px;
+        border: none;
+        background: #eee;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 45px;
+        font-weight: bold;
+        font-size: 28px;
+        color: teal;
+      }
+      .labellevel {
+        position: absolute;
+        top: 125px;
+        left: 255px;
+        padding: 0px;
+        border: none;
+        text-align: left;
+        font-weight: bold;
+      }
+      .level {
+        position: absolute;
+        top: 145px;
+        left: 255px;
+        padding: 0px;
+        width: 100px;
+        height: 45px;
+        border: none;
+        background: #eee;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 45px;
+        font-weight: bold;
+        font-size: 28px;
+        color: teal;
+      }
+      .next {
+        position: absolute;
+        top: 190px;
+        left: 255px;
+        padding: 0px;
+        border: none;
+        text-align: left;
+      }
+      .left {
+        position: absolute;
+        top: 320px;
+        left: 255px;
+        padding: 0px;
+        width: 45px;
+        height: 40px;
+        border: none;
+        background: teal;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 40px;
+      }
+      .right {
+        position: absolute;
+        top: 320px;
+        left: 310px;
+        padding: 0px;
+        width: 45px;
+        height: 40px;
+        border: none;
+        background: teal;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 40px;
+      }
+      .rotate {
+        position: absolute;
+        top: 370px;
+        left: 310px;
+        padding: 0px;
+        width: 45px;
+        height: 40px;
+        border: none;
+        background: teal;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 40px;
+      }
+      .down {
+        position: absolute;
+        top: 420px;
+        left: 255px;
+        padding: 0px;
+        width: 100px;
+        height: 40px;
+        border: none;
+        background: teal;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 40px;
+      }
+      .rotatealt {
+        position: absolute;
+        top: 370px;
+        left: 255px;
+        padding: 0px;
+        width: 45px;
+        height: 40px;
+        border: none;
+        background: teal;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 40px;
+      }
+      label:active {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="div">
+      <h1 class="tetris">TETRIS</h1>
+      <p class="by">by Aryan Maurya</p>
+      <a href="https://amsrportfolio.netlify.app">
+        <img alt="aryan\nsir img" class="img-circle" src="./favicon.png" />
+      </a>
+      <canvas
+        id="maincanvas"
+        class="maincanvas"
+        width="240"
+        height="400"
+      ></canvas>
+      <canvas id="subcanvas" class="subcanvas" width="96" height="96"></canvas>
+      <label class="labelscore">Score:</label>
+      <label class="score" id="score">0</label>
+      <label class="labellevel">Level:</label>
+      <label class="level" id="level">1</label>
+      <label class="next">Next piece</label>
+      <label class="left" id="left"> <<< </label>
+      <label class="right" id="right">>>></label>
+      <label class="down" id="down">down</label>
+      <label class="rotate" id="rotate">RR</label>
+      <label class="rotatealt" id="rotatealt">RL</label>
+    </div>
+    <script>
+     
+      Swal.fire("~All the very Best");
+      var res_y = window.screen.availHeight; //y axis pixel count
+      var res_x = window.screen.availWidth; //horizontal pixel count
+      var coeff;
+      if (res_x * 460 > res_y * 360)
+        //set landscape size coefficient
+        coeff = res_y / 460;
+      //set portrait size coefficient
+      else coeff = res_x / 360;
+      document.getElementById("div").style.transform = "scale(" + coeff + ")"; //resize page to fit any resolution
+      const maincanvas = document.getElementById("maincanvas");
+      const con = maincanvas.getContext("2d");
+      const subcanvas = document.getElementById("subcanvas");
+      const ctx = subcanvas.getContext("2d");
+      //controls
+      var left = document.getElementById("left");
+      var right = document.getElementById("right");
+      var down = document.getElementById("down");
+      var rotate = document.getElementById("rotate");
+      var rotatealt = document.getElementById("rotatealt");
+      var dropinterval = 0; //time to drop each piece
+      var nextpiece = "T"; //as the name suggests
+      var threshold = 1000;
+      const colors = [
+        null,
+        "#0D47A1",
+        "#FFD999",
+        "#0097A7",
+        "#5E35B1",
+        "#1B5E20",
+        "#B71C1C",
+        "#E65100",
+      ];
+      con.scale(20, 20); //scale down the canvas
+      ctx.scale(20, 20);
+      const player = {
+        pos: { x: 0, y: 0 },
+        matrix: createpiece(null),
+        score: 0,
+      };
+      //creates 2d array
+      function creatematrix(dim) {
+        const matrix = [];
+        for (var i = 0; i < dim[0]; ++i) {
+          matrix.push(dim.length == 1 ? 0 : creatematrix(dim.slice(1)));
+        }
+        return matrix;
+      }
+      var field = creatematrix([20, 12]); //grid representation of canvas
+      //copies one array into another with an offset
+      function join(main, sub) {
+        for (var y = 0; y < sub.matrix.length; ++y) {
+          for (var x = 0; x < sub.matrix[y].length; ++x) {
+            if (sub.matrix[x][y] !== 0) {
+              main[x + sub.pos.y][y + sub.pos.x] = sub.matrix[x][y];
+            }
+          }
+        }
+      }
+      //has layout of all pieces
+      function createpiece(piece) {
+        switch (piece) {
+          case "L":
+            return [
+              [0, 1, 0],
+              [0, 1, 0],
+              [0, 1, 1],
+            ];
+            break;
+          case "O":
+            return [
+              [2, 2],
+              [2, 2],
+            ];
+            break;
+          case "I":
+            return [
+              [0, 3, 0, 0],
+              [0, 3, 0, 0],
+              [0, 3, 0, 0],
+              [0, 3, 0, 0],
+            ];
+            break;
+          case "T":
+            return [
+              [0, 0, 0],
+              [4, 4, 4],
+              [0, 4, 0],
+            ];
+            break;
+          case "S":
+            return [
+              [0, 5, 5],
+              [5, 5, 0],
+              [0, 0, 0],
+            ];
+          case "Z":
+            return [
+              [6, 6, 0],
+              [0, 6, 6],
+              [0, 0, 0],
+            ];
+          case "J":
+            return [
+              [0, 7, 0],
+              [0, 7, 0],
+              [7, 7, 0],
+            ];
+            break;
+        }
+      }
+      //changes the next piece
+      function changeplayer() {
+        var pieces = ["L", "O", "I", "T", "S", "Z", "J"];
+        player.matrix = createpiece(nextpiece);
+        nextpiece = pieces[(Math.random() * pieces.length) | 0];
+        player.pos.y = 0;
+        player.pos.x =
+          ((field[0].length / 2) | 0) - ((player.matrix[0].length / 2) | 0);
+        if (checkcollision(field, player)) {
+          amsrLose();
+          // alert("⚠GAME OVER!!!⚠\nScore: " + player.score);
+          field = creatematrix([20, 12]);
+          player.score = 0;
+          scorerefresh();
+        }
+      }
+      function amsrLose() {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "'⚠GAME OVER!!!⚠\nScore: ' + player.score",
+        });
+      }
+      //draws each piece from its matrix
+      function drawpieces(matrix, startpos) {
+        for (var y = 0; y < matrix.length; ++y) {
+          for (var x = 0; x < matrix[y].length; ++x) {
+            if (matrix[y][x] !== 0) {
+              con.fillStyle = colors[matrix[y][x]];
+              con.fillRect(x + startpos.x, y + startpos.y, 1, 1);
+              con.lineWidth = 0.1;
+              con.strokeStyle = "black";
+              con.strokeRect(x + startpos.x, y + startpos.y, 1, 1);
+            }
+          }
+        }
+      }
+      //draws the next piece
+      function drawnext() {
+        matrix = createpiece(nextpiece);
+        for (var y = 0; y < matrix.length; ++y) {
+          for (var x = 0; x < matrix[y].length; ++x) {
+            if (matrix[y][x] !== 0) {
+              ctx.fillStyle = colors[matrix[y][x]];
+              ctx.fillRect(x + 1, y + 1, 1, 1);
+              ctx.lineWidth = 0.1;
+              ctx.strokeStyle = "black";
+              ctx.strokeRect(x + 1, y + 1, 1, 1);
+            }
+          }
+        }
+      }
+      //clears all redraws on canvas
+      function draw() {
+        con.fillStyle = "black";
+        con.fillRect(0, 0, maincanvas.width, maincanvas.height);
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, subcanvas.width, subcanvas.height);
+        drawpieces(field, { x: 0, y: 0 });
+        drawpieces(player.matrix, player.pos);
+        drawnext();
+      }
+      //checks for collision using grid and matrix
+      function checkcollision(main, sub) {
+        const matrix = sub.matrix,
+          offset = sub.pos;
+        for (var y = 0; y < matrix.length; ++y) {
+          for (var x = 0; x < matrix[y].length; ++x) {
+            if (
+              matrix[y][x] !== 0 &&
+              (main[y + offset.y] && main[y + offset.y][x + offset.x]) !== 0
+            )
+              return true;
+          }
+        }
+        return false;
+      }
+      //clears each filled row
+      function clear() {
+        var rowscleared = 0;
+        first: for (var y = field.length - 1; y > 0; --y) {
+          for (var x = 0; x < field[y].length; ++x) {
+            if (field[y][x] === 0) continue first;
+          }
+          const removed = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+          field.splice(y, 1)[0];
+          field.unshift(removed);
+          ++rowscleared;
+          ++y;
+          player.score += 10 * rowscleared;
+        }
+      }
+      //moves piece on x axis
+      function movepiece(dir) {
+        player.pos.x += dir;
+        if (checkcollision(field, player)) player.pos.x -= dir;
+      }
+      //drops each piece by one unit
+      function droppiece() {
+        player.pos.y++;
+        if (checkcollision(field, player)) {
+          player.pos.y--;
+          join(field, player);
+          changeplayer();
+          clear();
+          scorerefresh();
+        }
+        dropinterval = 0;
+      }
+      //transposes each matrix then switches rows or columns
+      function rotatematrix(matrix, clockwise) {
+        for (var y = 0; y < matrix.length; ++y) {
+          for (var x = 0; x < y; ++x) {
+            var temp = matrix[y][x];
+            matrix[y][x] = matrix[x][y];
+            matrix[x][y] = temp;
+          }
+        }
+        if (clockwise) {
+          for (var y = 0; y < matrix.length; ++y) {
+            for (var x = 0; x < Math.round(matrix[y].length / 2); ++x) {
+              var temp = matrix[y][x];
+              matrix[y][x] = matrix[y][matrix[y].length - 1 - x];
+              matrix[y][matrix[y].length - 1 - x] = temp;
+            }
+          }
+        } else {
+          for (var y = 0; y < Math.round(matrix.length / 2); ++y) {
+            for (var x = 0; x < matrix[y].length; ++x) {
+              var temp = matrix[y][x];
+              matrix[y][x] = matrix[matrix.length - 1 - y][x];
+              matrix[matrix.length - 1 - y][x] = temp;
+            }
+          }
+        }
+      }
+      //rotates each piece
+      function rotatepiece(clockwise) {
+        var pos = player.pos.x,
+          offset = 1;
+        rotatematrix(player.matrix, clockwise);
+        while (checkcollision(field, player)) {
+          player.pos.x += offset;
+          offset = -(offset + (offset > 0 ? 1 : -1));
+          if (offset > player.matrix[0].length) {
+            rotatematrix(player.matrix, !clockwise);
+            player.pos.x = pos;
+            return;
+          }
+        }
+      }
+      //animates game with time change
+      var time_0 = 0,
+        timechange;
+      function update(timestamp) {
+        timechange = timestamp - time_0;
+        dropinterval += timechange;
+        if (dropinterval >= threshold) {
+          droppiece();
+        }
+        draw();
+        time_0 = timestamp;
+        window.webkitRequestAnimationFrame(update);
+      }
+      //updates score
+      function scorerefresh() {
+        document.getElementById("score").innerText = player.score;
+        document.getElementById("level").innerText =
+          Math.floor(player.score / 100) + 1;
+      }
+      //event listeners
+      left.addEventListener("click", onPressleft, false);
+      right.addEventListener("click", onPressright, false);
+      down.addEventListener("touchstart", onPressdown, false);
+      down.addEventListener("touchend", onUnpress, false);
+      down.addEventListener("touchcancel", onUnpress, false);
+      rotate.addEventListener("click", onClockwise, false);
+      rotatealt.addEventListener("click", onAnticlockwise, false);
+      //event handlers
+      function onPressleft() {
+        movepiece(-1);
+      }
+      function onPressright() {
+        movepiece(1);
+      }
+      function onPressdown() {
+        threshold /= 10;
+      }
+      function onUnpress() {
+        threshold = 1000;
+      }
+      function onClockwise() {
+        rotatepiece(1);
+      }
+      function onAnticlockwise() {
+        rotatepiece(0);
+      }
+      changeplayer();
+      update(time_0); //sets time interval for animations
+    </script>
+  </body>
+</html>
+
+<!-- 
+
+      ************************************************************
+      
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
